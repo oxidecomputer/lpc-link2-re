@@ -3,7 +3,8 @@
 (Written by @cbiffle with major contributions by @kc8apf and @bcantrill.)
 
 Here is a reverse engineered minimal specification of the LPC-Link2's USB
-interface for capturing SWO trace data.
+interface for capturing SWO trace data. There's also a reference implementation
+in this repo; see the end of this doc for instructions.
 
 ## Context
 
@@ -192,3 +193,23 @@ that may have piled up in the buffer while the `82` response was waiting.
 
 An `82`-type response is the final packet sent in a given `capture epoch`. The
 next response will increment it by one.
+
+## Reference implementation
+
+We provide a simple demonstration of the protocol called `lpc-cat`. This is a
+command-line program that will connect to an LPC-Link2 and output raw SWO data
+on stdout.
+
+The program is written in Rust; to build it, you will need a Rust toolchain.
+
+Build and run as follows:
+
+```
+cargo run <bitrate> | hexdump -C
+```
+
+e.g. for 3Mbps, `cargo run 3000000 | hexdump -C`.
+
+**Note:** This will only do something if your LPC-Link2 is receiving SWO input.
+Getting your microcontroller to produce UART-formatted SWO input at a particular
+bit rate is board-specific and out of scope here. We trust you can work it out.
