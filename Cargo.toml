@@ -1,0 +1,11 @@
+[package]
+name = "lpc-cat"
+version = "0.1.0"
+authors = ["Cliff L. Biffle <cliff@oxide.computer>"]
+edition = "2018"
+
+[dependencies]
+hidapi = "1.2"
+structopt = "0.3"
+log = "0.4"
+pretty_env_logger = "0.4"
